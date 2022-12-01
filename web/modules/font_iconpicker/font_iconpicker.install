@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Font Icon Picker module.
+ */
+
+/**
+ * Implements hook_requirements().
+ *
+ * @SuppressWarnings("php:S100")
+ */
+function font_iconpicker_requirements($phase) {
+  $requirements = [];
+
+  if ($phase === 'runtime') {
+    $requirements['fonticonpicker_library'] = [
+      'title'       => t('FontIconPicker library'),
+      'description' => '',
+      'severity'    => REQUIREMENT_OK,
+      'value'       => t('Installed'),
+    ];
+
+    $path = Drupal::root() . '/libraries/fonticonpicker';
+    if (!is_file($path . '/js/jquery.fonticonpicker.min.js')) {
+      $requirements['fonticonpicker_library']['description'] = t(
+        'The <a href=":url">FontIconPicker library</a> should be installed at <strong>/libraries/fonticonpicker/js/jquery.fonticonpicker.min.js</strong>. Check out file or folder permissions if troubled.',
+        [
+          ':url' => 'https://github.com/fontIconPicker/fontIconPicker/',
+        ]
+      );
+      $requirements['fonticonpicker_library']['severity'] = REQUIREMENT_ERROR;
+      $requirements['fonticonpicker_library']['value'] = t('Not installed');
+    }
+  }
+
+  return $requirements;
+}

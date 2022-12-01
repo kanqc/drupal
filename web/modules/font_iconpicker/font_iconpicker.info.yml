@@ -1,0 +1,15 @@
+name: Font Icon Picker
+type: module
+description: Icon picker field that uses you custom font project library.
+core: 8.x
+core_version_requirement: ^8 || ^9 || ^10
+package: Custom
+configure: font_iconpicker.settings
+
+dependencies:
+  - drupal:field
+
+# Information added by Drupal.org packaging script on 2022-08-15
+version: '1.0.2'
+project: 'font_iconpicker'
+datestamp: 1660566030

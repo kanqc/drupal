@@ -1,0 +1,26 @@
+{
+    "name": "drupal/font_iconpicker",
+    "type": "drupal-module",
+    "description": "Icon picker field that uses you custom font project library.",
+    "homepage": "http://drupal.org/project/font_iconpicker",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "composer/installers": "^1.9",
+        "drupal/core": "^8 || ^9 || ^10",
+        "fonticonpicker/fonticonpicker": "v3.1.1"
+    },
+    "repositories": {
+        "fonticonpicker": {
+            "type": "package",
+            "package": {
+                "name": "fonticonpicker/fonticonpicker",
+                "version": "v3.1.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/fontIconPicker/fontIconPicker/releases/download/v3.1.1/fontIconPicker.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    }
+}

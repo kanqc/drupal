@@ -1,0 +1,97 @@
+<?php
+
+/**
+ * @file
+ * Field Font Iconpicker module file.
+ */
+
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function font_iconpicker_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.font_iconpicker':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Pick up your custom font icons from a user friendly widget.') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * @SuppressWarnings("php:S100","php:S1172")
+ */
+function font_iconpicker_theme($existing, $type, $theme, $path) {
+  return [
+    'font_icon' => [
+      'variables' => [
+        'icon' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * @SuppressWarnings("php:S100")
+ */
+function font_iconpicker_library_info_alter(&$libraries, $extension) {
+  if ($extension === 'font_iconpicker') {
+    $config = Drupal::configFactory()->get('font_iconpicker.settings');
+
+    if (isset($libraries['fonticonpicker'])) {
+      $css_path = '/libraries/fonticonpicker/css/themes/' .
+        $config->get('theme') .
+        '-theme/jquery.fonticonpicker.' .
+        str_replace('-', '', $config->get('theme')) .
+        '.min.css';
+
+      $libraries['fonticonpicker']['css']['theme'] = [
+        $css_path => [
+          'minified' => TRUE,
+        ],
+      ];
+    }
+
+    if (
+      isset($libraries['widget']) &&
+      $config->get('css_font_path')
+    ) {
+      // Create new library with configured CSS font filepath.
+      $libraries['font-custom'] = [
+        'css' => [
+          'component' => [
+            '/' . ltrim($config->get('css_font_path'), '/') => [],
+          ],
+        ],
+      ];
+
+      // Add new library dependency to widget library.
+      $libraries['widget']['dependencies'][] = 'font_iconpicker/font-custom';
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_HOOK for "font_icon".
+ */
+function template_preprocess_font_icon(&$variables) {
+  $variables['icon_attributes'] = new Attribute();
+
+  $config = Drupal::configFactory()->get('font_iconpicker.settings');
+  if ($config->get('additional_class')) {
+    $variables['icon_attributes']->addClass($config->get('additional_class'));
+  }
+
+  // Add selected icon.
+  $variables['icon_attributes']->addClass($variables['icon']);
+
+  $variables['#cache']['tags'] = $config->getCacheTags();
+}
+

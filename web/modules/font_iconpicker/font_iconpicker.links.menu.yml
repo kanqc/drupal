@@ -1,0 +1,5 @@
+font_iconpicker.settings:
+  title: 'Font Icon Picker'
+  parent: system.admin_config_ui
+  description: 'Font Icon Picker settings'
+  route_name: font_iconpicker.settings

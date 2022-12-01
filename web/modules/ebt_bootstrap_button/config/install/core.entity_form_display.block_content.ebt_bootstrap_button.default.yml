@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ebt_bootstrap_button
+    - field.field.block_content.ebt_bootstrap_button.field_ebt_bootstrap_button_link
+    - field.field.block_content.ebt_bootstrap_button.field_ebt_settings
+  module:
+    - ebt_bootstrap_button
+    - link
+id: block_content.ebt_bootstrap_button.default
+targetEntityType: block_content
+bundle: ebt_bootstrap_button
+mode: default
+content:
+  field_ebt_bootstrap_button_link:
+    weight: 27
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_ebt_settings:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: ebt_settings_bootstrap_button
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

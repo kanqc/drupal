@@ -1,0 +1,109 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{%
+  set classes = [
+  'block',
+  'ebt-block',
+  'ebt-bootstrap-button',
+  'ebt-block-' ~ plugin_id|clean_class,
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  'block-revision-id-' ~ configuration.block_revision_id,
+]
+%}
+{%
+  set button_classes = [
+  'btn',
+]
+%}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.add_nofollow is not empty and content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.add_nofollow == 1 %}
+  {% set nofollow = ' rel="nofollow"' %}
+{% else %}
+  {% set nofollow = '' %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.open_in_new_tab is not empty and content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.open_in_new_tab == 1 %}
+  {% set target = ' target="_blank"' %}
+{% else %}
+  {% set target = '' %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.alignment == 'left' %}
+  {% set classes = classes|merge(['ebt-align-left']) %}
+{% elseif content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.alignment == 'center' %}
+  {% set classes = classes|merge(['ebt-align-center']) %}
+{% elseif content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.alignment == 'right' %}
+  {% set classes = classes|merge(['ebt-align-right']) %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.outline_button is not empty and content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.outline_button == 1 %}
+  {% set button_classes = button_classes|merge(['btn-outline-' ~ content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.button_type]) %}
+{% else %}
+  {% set button_classes = button_classes|merge(['btn-' ~ content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.button_type]) %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.active_button is not empty and content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.active_button == 1 %}
+  {% set button_classes = button_classes|merge(['active']) %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.disable_button is not empty and content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.disable_button == 1 %}
+  {% set button_classes = button_classes|merge(['disabled']) %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.size == 'size-default' %}
+  {% set button_classes = button_classes|merge(['size-default']) %}
+{% elseif content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.size == 'btn-sm' %}
+  {% set button_classes = button_classes|merge(['btn-sm']) %}
+{% elseif content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.size == 'btn-lg' %}
+  {% set button_classes = button_classes|merge(['btn-lg']) %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.stetched is not empty and content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.stetched == 1 %}
+  {% set classes = classes|merge(['ebt-stretched']) %}
+{% endif %}
+
+{% if content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.custom_class_name is not empty %}
+  {% set button_classes = button_classes|merge([' ' ~ content.field_ebt_settings['#object'].field_ebt_settings.0.ebt_settings.custom_class_name]) %}
+{% endif %}
+
+{{ attach_library('ebt_bootstrap_button/ebt_bootstrap_button_view') }}
+<div{{ attributes.addClass(classes) }}>
+  <div class="bg-inner"></div>
+  <div class="ebt-container">
+    {{ title_prefix }}
+    {{ title_suffix }}
+    {% block content %}
+      <span class="ebt-bootstrap-button-wrapper">
+        <a href="{{ content.field_ebt_bootstrap_button_link.0['#url'] }}" class="{{ button_classes|join(' ') }}" {{ nofollow|raw }} {{ target|raw }}>{{ content.field_ebt_bootstrap_button_link.0['#title'] }}</a>
+        {{ content|without('field_ebt_settings', 'field_ebt_bootstrap_button_link') }}
+      </span>
+    {% endblock %}
+  </div>
+</div>
+{{ styles|raw }}

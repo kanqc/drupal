@@ -1,0 +1,26 @@
+font_iconpicker.settings:
+  type: config_object
+  mapping:
+    css_font_path:
+      type: string
+      label: 'Font CSS file path'
+    class_prefix:
+      type: string
+      label: 'Class prefix'
+    additional_class:
+      type: string
+      label: 'Additionnal required class'
+    theme:
+      type: string
+      label: 'Widget theme'
+
+field.widget.settings.font_iconpicker:
+  type: mapping
+  label: 'Widget settings'
+  mapping:
+    empty_icon:
+      type: boolean
+      label: 'Display empty icon.'
+    has_search:
+      type: boolean
+      label: 'Display search input.'

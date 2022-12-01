@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ebt_bootstrap_button
+label: 'EBT Bootstrap Button'
+revision: 0
+description: 'Extra Block Type (EBT): Bootstrap Button'

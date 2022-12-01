@@ -1,0 +1,13 @@
+name: Quick Tabs Accordion
+description: "Render content with a jQuery UI accordion style"
+type: module
+core_version_requirement: ^8.8 || ^9
+configure: quicktabs.admin
+dependencies:
+  - drupal:block
+  - jquery_ui_accordion:jquery_ui_accordion
+
+# Information added by Drupal.org packaging script on 2022-08-26
+version: '8.x-3.0-alpha5+1-dev'
+project: 'quicktabs'
+datestamp: 1661485242

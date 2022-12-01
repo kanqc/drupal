@@ -1,0 +1,4 @@
+services:
+  font_iconpicker.icon_helper:
+    class: Drupal\font_iconpicker\IconHelper
+    arguments: ['@config.factory', '@library.discovery.parser']

@@ -1,0 +1,13 @@
+type: module
+name: 'Extra Block Types (EBT): Bootstrap Button'
+description: 'Adds Bootstrap Button block type.'
+core_version_requirement: ^8 || ^9
+package: 'Extra Block Types'
+
+dependencies:
+  - ebt_core:ebt_core
+
+# Information added by Drupal.org packaging script on 2022-07-19
+version: '1.3.1'
+project: 'ebt_bootstrap_button'
+datestamp: 1658239718

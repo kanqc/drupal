@@ -1,0 +1,7 @@
+font_iconpicker.settings:
+  path: '/admin/config/user-interface/font-iconpicker'
+  defaults:
+    _form: '\Drupal\font_iconpicker\Form\SettingsForm'
+    _title: 'Font Icon Picker settings'
+  requirements:
+    _permission: 'administer site configuration'

@@ -1,0 +1,19 @@
+{
+    "name": "drupal/ebt_bootstrap_button",
+    "type": "drupal-module",
+    "description": "Extra Block Types (EBT): Bootstrap Button",
+    "keywords": ["Drupal"],
+    "license": "GPL-2.0-or-later",
+    "homepage": "http://drupal.org/project/ebt_bootstrap_button",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/ebt_bootstrap_button",
+        "source": "https://git.drupalcode.org/project/ebt_bootstrap_button"
+    },
+    "conflict": {
+        "drupal/ebt_bootstrap_button": "*"
+    },
+    "require": {
+        "drupal/ebt_core": "^1.3"
+    }
+}

@@ -1,0 +1,4 @@
+ebt_bootstrap_button_view:
+  css:
+    component:
+      css/ebt_bootstrap_button_view.css: {}
